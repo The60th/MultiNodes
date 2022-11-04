@@ -20,7 +20,7 @@ public class ChunkEvents implements Listener {
         TileKey key = new TileKey(chunk.getChunkKey());
 
         //This will load it by default and provide the tile value if needed
-        TileValue tile = CacheManager.getInstance().getCache().get(key);
+        TileValue tile = CacheManager.getInstance().getCache().get(key.getKey());
         //Add chunk to cache
     }
 
@@ -30,7 +30,7 @@ public class ChunkEvents implements Listener {
 
         TileKey key = new TileKey(chunk.getChunkKey()); // Create a tile key here from the chunk
 
-        CacheManager.getInstance().getCache().invalidate(key);
+        CacheManager.getInstance().getCache().invalidate(key.getKey());
         //Remove chunk from cache
     }
 

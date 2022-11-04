@@ -11,16 +11,15 @@ public class CacheManager {
     private static final CacheManager instance = new CacheManager();
 
     private static final int CAPACITY = 1000;
-    private final LoadingCache<TileKey, TileValue> tileCache;
+    private final LoadingCache<Long, TileValue> tileCache;
 
-    CacheLoader<TileKey, TileValue> loader = new CacheLoader<TileKey,TileValue>() {
+    CacheLoader<Long, TileValue> loader = new CacheLoader<Long,TileValue>() {
         @Override
-        public @NotNull TileValue load(@NotNull TileKey key){
+        public @NotNull TileValue load(@NotNull Long key){
             //So this runs when we call get/getUnchecked
             //So .get() will call this method if the value doesn't already exist
             //TODO Implement this
-            RedisConnection.getInstance().getTileValue(key);
-            return new TileValue();
+            return RedisConnection.getInstance().getTileValue(new TileKey(key));
         }
     };
     private CacheManager() {
@@ -31,7 +30,7 @@ public class CacheManager {
 
     }
 
-    public LoadingCache<TileKey, TileValue> getCache(){
+    public LoadingCache<Long, TileValue> getCache(){
         return this.tileCache;
     }
 

@@ -11,14 +11,18 @@ import java.util.function.Consumer;
 
 public class Propagate {
 
-    public static void setUp(){
+    private static final Propagate instance = new Propagate();
+    public static  Propagate getInstance(){return instance;}
+
+    private Propagate(){
         listen();
     }
 
     private static final String chunkChannel = "chunkChannel";
 
-    private static void notifyChunk(Chunk chunk, TileKey key){
-        MultiLib.notify(chunk,chunkChannel,key.toString());
+    public  void notifyChunk(TileKey key){
+        System.out.println("Notify on " + chunkChannel);
+        MultiLib.notify(chunkChannel,key.toJson().toString());
     }
 
     private static void listen() {
@@ -26,11 +30,13 @@ public class Propagate {
             //Do something here
             //TODO Logger
             //One of our chunks has updated on a remote server we need to query for that chunk
-
-            TileKey key = TileKey.TileKeyFromString(data);
+            System.out.println("Incoming multilib message");
+            TileKey key = TileKey.fromJson(data);
             try {
                 //This will load the chunk into cache
-                CacheManager.getInstance().getCache().get(key);
+                CacheManager.getInstance().getCache().invalidate(key.getKey());
+                CacheManager.getInstance().getCache().get(key.getKey());
+                System.out.println("Added tile to cache via multlib message");
             } catch (ExecutionException e) {
                 throw new RuntimeException(e);
             }
