@@ -1,10 +1,9 @@
-package com.the60th.multinodes.cache;
+package com.the60th.multinodes.core.cache;
 
-import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.the60th.multinodes.database.RedisConnection;
+import com.the60th.multinodes.core.database.RedisConnection;
 import org.jetbrains.annotations.NotNull;
 
 public class CacheManager {

@@ -1,9 +1,8 @@
-package com.the60th.multinodes.database;
+package com.the60th.multinodes.core.database;
 
 import com.the60th.multinodes.MultiNodes;
-import com.the60th.multinodes.cache.CacheManager;
-import com.the60th.multinodes.cache.TileKey;
-import com.the60th.multinodes.cache.TileValue;
+import com.the60th.multinodes.core.cache.TileKey;
+import com.the60th.multinodes.core.cache.TileValue;
 import com.the60th.multinodes.util.Strings;
 import redis.clients.jedis.Jedis;
 

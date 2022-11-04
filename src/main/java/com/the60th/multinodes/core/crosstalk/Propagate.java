@@ -1,13 +1,11 @@
-package com.the60th.multinodes.crosstalk;
+package com.the60th.multinodes.core.crosstalk;
 
 import com.github.puregero.multilib.MultiLib;
 import com.the60th.multinodes.MultiNodes;
-import com.the60th.multinodes.cache.CacheManager;
-import com.the60th.multinodes.cache.TileKey;
-import org.bukkit.Chunk;
+import com.the60th.multinodes.core.cache.CacheManager;
+import com.the60th.multinodes.core.cache.TileKey;
 
 import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
 
 public class Propagate {
     private static final String chunkChannel = "chunkChannel";

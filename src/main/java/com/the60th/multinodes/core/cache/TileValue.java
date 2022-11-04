@@ -1,4 +1,4 @@
-package com.the60th.multinodes.cache;
+package com.the60th.multinodes.core.cache;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

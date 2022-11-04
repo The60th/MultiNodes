@@ -1,17 +1,22 @@
 package com.the60th.multinodes.events;
 
-import com.the60th.multinodes.cache.CacheManager;
-import com.the60th.multinodes.cache.TileKey;
-import com.the60th.multinodes.cache.TileValue;
+import com.the60th.multinodes.MultiNodes;
+import com.the60th.multinodes.core.cache.CacheManager;
+import com.the60th.multinodes.core.cache.TileKey;
+import com.the60th.multinodes.core.cache.TileValue;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
 import java.util.concurrent.ExecutionException;
 
-public class ChunkEvents implements Listener {
+public class ChunkListeners extends RegistrableListener {
+    private final MultiNodes plugin;
+    public ChunkListeners(MultiNodes plugin) {
+        super(plugin);
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onChunkLoad(ChunkLoadEvent event) throws ExecutionException {

@@ -31,6 +31,16 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/SPONGEPO.SF</exclude>
+                    <exclude>META-INF/SPONGEPO.DSA</exclude>
+                    <exclude>META-INF/SPONGEPO.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <createDependencyReducedPom>false</createDependencyReducedPom>
             </configuration>
           </execution>
