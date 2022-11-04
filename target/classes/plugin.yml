@@ -1,0 +1,4 @@
+name: MultiNodes
+version: '1.0'
+main: com.the60th.multinodes.MultiNodes
+api-version: 1.19
