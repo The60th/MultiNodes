@@ -39,25 +39,10 @@ public class CmdNodes {
             player.sendMessage("value: " + val.getKey() + "  --  " + val.getOwner());
         });
     }
-    @CommandMethod("nodes info")
-    @CommandDescription("Gets current chunk info")
-    public void info(final Player player){
-        Chunk chunk = player.getLocation().getChunk();
-        long key = chunk.getChunkKey();
-        player.sendMessage(Component.text("Chunk key is: ").append(Component.text(key)).color(NamedTextColor.YELLOW));
-    }
-
     @CommandMethod("nodes load|load2 <key> <value>")
     @CommandDescription("Load the current node you are in")
     public void load(final Player player, final @Argument("key") String key, final @Argument("value") String value ){
-        TileKey key1 = new TileKey(player.getLocation().getChunk().getChunkKey());
-        TileValue value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
-        player.sendMessage(Component.text("Loaded node: \n Key - ")
-                        .append(Component.text(value1.getKey()))
-                        .append(Component.text("\n Owner: - "))
-                        .append(Component.text(value1.getOwner()))
-                .color(NamedTextColor.YELLOW));
-
+        printLocalNode(player);
         //RedisConnection.getInstance().getConnection().set(key,value);
     }
 
@@ -75,13 +60,37 @@ public class CmdNodes {
                 .color(NamedTextColor.YELLOW));
 
         //Save to redis
-
         TileManager.claimTile(chunk,key1, value1);
-
-
         //String value = RedisConnection.getInstance().getConnection().get(key);
         //player.sendMessage(Component.text("Key of: " ).append(Component.text(key)).color(NamedTextColor.YELLOW));
         //player.sendMessage(Component.text("Value of: ").append(Component.text(value)).color(NamedTextColor.YELLOW));
     }
 
+    @CommandMethod("nodes owner")
+    @CommandDescription("set an owner")
+    public void owner(Player player){
+        Chunk chunk = player.getLocation().getChunk();
+        TileKey key1 = new TileKey(chunk.getChunkKey());
+        TileValue value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
+        value1.setOwner(player.getName());
+        printLocalNode(player);
+        TileManager.claimTile(chunk,key1, value1);
+
+    }
+    @CommandMethod("nodes info")
+    @CommandDescription("Node info")
+    public void info(final Player player){
+        printLocalNode(player);
+        //RedisConnection.getInstance().getConnection().set(key,value);
+    }
+
+    private void printLocalNode(Player player) {
+        TileKey key1 = new TileKey(player.getLocation().getChunk().getChunkKey());
+        TileValue value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
+        player.sendMessage(Component.text("Current node: \n Key - ")
+                .append(Component.text(value1.getKey()))
+                .append(Component.text("\n Owner: - "))
+                .append(Component.text(value1.getOwner()))
+                .color(NamedTextColor.YELLOW));
+    }
 }

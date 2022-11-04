@@ -1,6 +1,7 @@
 package com.the60th.multinodes;
 
 import com.the60th.multinodes.command.cloud.NodeCommandManager;
+import com.the60th.multinodes.crosstalk.Propagate;
 import com.the60th.multinodes.database.RedisConnection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +18,7 @@ public final class MultiNodes extends JavaPlugin {
         // Plugin startup logic
         instance = this;
         commandManager = new NodeCommandManager(this);
+        Propagate.listen();
     }
 
     @Override

@@ -10,22 +10,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
 public class Propagate {
-
-    private static final Propagate instance = new Propagate();
-    public static  Propagate getInstance(){return instance;}
-
-    private Propagate(){
-        listen();
-    }
-
     private static final String chunkChannel = "chunkChannel";
 
-    public  void notifyChunk(TileKey key){
+    public static void notifyChunk(TileKey key){
         System.out.println("Notify on " + chunkChannel);
         MultiLib.notify(chunkChannel,key.toJson().toString());
     }
 
-    private static void listen() {
+    public static void listen() {
         MultiLib.onString(MultiNodes.getInstance(), chunkChannel, data -> {
             //Do something here
             //TODO Logger

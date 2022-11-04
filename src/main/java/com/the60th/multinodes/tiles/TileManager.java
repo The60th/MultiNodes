@@ -13,6 +13,6 @@ public class TileManager {
     public static void claimTile(Chunk chunk, TileKey tileKey, TileValue value){
         RedisConnection.getInstance().addTile(tileKey,value);
         CacheManager.getInstance().getCache().put(tileKey.getKey(),value);
-        Propagate.getInstance().notifyChunk(tileKey);
+        Propagate.notifyChunk(tileKey);
     }
 }
