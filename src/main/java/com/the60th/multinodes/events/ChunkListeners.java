@@ -8,6 +8,7 @@ import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.ExecutionException;
 
@@ -23,19 +24,30 @@ public class ChunkListeners extends RegistrableListener {
         //Create this from a chunk
         Chunk chunk = event.getChunk();
         TileKey key = new TileKey(chunk.getChunkKey());
-
         //This will load it by default and provide the tile value if needed
-        TileValue tile = CacheManager.getInstance().getCache().get(key.getKey());
+        //TODO Async this
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                //Loads to cache
+                CacheManager.getInstance().getCache().getUnchecked(key.getKey());
+            }
+        }.runTaskLaterAsynchronously(plugin,1L);
         //Add chunk to cache
     }
 
     @EventHandler
     public void onChunkUnload(ChunkUnloadEvent event){
         Chunk chunk = event.getChunk();
-
         TileKey key = new TileKey(chunk.getChunkKey()); // Create a tile key here from the chunk
+        //TODO Async this
+        new BukkitRunnable(){
 
-        CacheManager.getInstance().getCache().invalidate(key.getKey());
+            @Override
+            public void run() {
+                CacheManager.getInstance().getCache().invalidate(key.getKey());
+            }
+        }.runTaskLaterAsynchronously(plugin,1L);
         //Remove chunk from cache
     }
 

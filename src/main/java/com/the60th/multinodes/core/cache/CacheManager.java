@@ -6,6 +6,8 @@ import com.google.common.cache.LoadingCache;
 import com.the60th.multinodes.core.database.RedisConnection;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.ExecutionException;
+
 public class CacheManager {
     private static final CacheManager instance = new CacheManager();
 
@@ -18,7 +20,12 @@ public class CacheManager {
             //So this runs when we call get/getUnchecked
             //So .get() will call this method if the value doesn't already exist
             //TODO Implement this
-            return RedisConnection.getInstance().getTileValue(new TileKey(key));
+            try {
+                return RedisConnection.getInstance().getResult(new TileKey(key));
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            //return RedisConnection.getInstance().getTileValue(new TileKey(key));
         }
     };
     private CacheManager() {

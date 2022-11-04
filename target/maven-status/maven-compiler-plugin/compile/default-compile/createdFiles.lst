@@ -1,6 +1,8 @@
+com\the60th\multinodes\events\ChunkListeners$1.class
 com\the60th\multinodes\MultiNodes.class
 com\the60th\multinodes\core\database\RedisConnection.class
 com\the60th\multinodes\core\tiles\TileManager.class
+com\the60th\multinodes\events\ChunkListeners$2.class
 com\the60th\multinodes\core\cache\TileKey.class
 com\the60th\multinodes\events\ChunkListeners.class
 com\the60th\multinodes\command\CmdNodes.class

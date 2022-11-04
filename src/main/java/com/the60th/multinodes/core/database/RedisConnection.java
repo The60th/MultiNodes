@@ -4,20 +4,20 @@ import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.core.cache.TileKey;
 import com.the60th.multinodes.core.cache.TileValue;
 import com.the60th.multinodes.util.Strings;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisFuture;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.api.async.RedisAsyncCommands;
 import redis.clients.jedis.Jedis;
 
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 
 public class RedisConnection {
     private static final RedisConnection instance = new RedisConnection();
 
-    private Jedis connection;
 
-    public void shutDown(){
-        this.connection.close();
-    }
-
-    public TileValue getTileValue(TileKey key){
+/*    public TileValue getTileValue(TileKey key){
         TileValue value;
         String load = this.connection.get(String.valueOf(key.getKey()));
         if(load == null){
@@ -30,12 +30,13 @@ public class RedisConnection {
         }
 
         return value;
-    }
+    }*/
 
     public void addTile(TileKey key, TileValue value){
-        this.connection.set(String.valueOf(key.getKey()),value.toJson().toString());
+        asyncCommands.set(String.valueOf(key.getKey()),value.toJson().toString());
     }
 
+    public RedisAsyncCommands<String,String> asyncCommands;
     private RedisConnection(){
         //do stuff here
 
@@ -45,29 +46,38 @@ public class RedisConnection {
         String password = "password";
         int port = 6379;
         //TODO Not sure if we can keep a single connection open like this long term honestly?
-        connection = new Jedis(hostName,port);
+        //connection = new Jedis(hostName,port);
         //connection.auth(password);
+        RedisClient redisClient = RedisClient
+                .create("redis://127.0.0.1:6379/");
+        StatefulRedisConnection<String, String> connection
+                = redisClient.connect();
+        asyncCommands = connection.async();
+
 
         MultiNodes.getInstance().getLogger().log(Level.ALL, Strings.REDIS_CONNECTION);
     }
     //TODO Need a way to serialize chunkKeys and chunkValues into strings for writing to Redis
 
+    public TileValue getResult(TileKey key) throws ExecutionException, InterruptedException {
+        RedisFuture<String> result = asyncCommands.get(String.valueOf(key.getKey()));
+        TileValue tileValue;
+        String val = result.get();
+        if(val == null){
+            //Create new tileValue
+            MultiNodes.getLog().info("Creating new node");
+            tileValue = new TileValue(key.getKey());
+            //Sync back to redis
+            addTile(key,tileValue);
+        }else{
+            tileValue = TileValue.fromJson(val);
+            MultiNodes.getLog().info("Loading node");
+        }
 
-    public Jedis getConnection() {
-        return connection;
+        return tileValue;
     }
 
     public static RedisConnection getInstance() {
         return instance;
-    }
-
-
-    //TODO TEST
-    //Test Method for basic Redis connection
-    public static void main(String[] args){
-        Jedis jedis = new Jedis("127.0.0.1",6379);
-        //jedis.auth("root");
-
-        System.out.println("Connected!");
     }
 }

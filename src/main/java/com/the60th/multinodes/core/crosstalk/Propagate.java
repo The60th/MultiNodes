@@ -11,7 +11,7 @@ public class Propagate {
     private static final String chunkChannel = "chunkChannel";
 
     public static void notifyChunk(TileKey key){
-        System.out.println("Notify on " + chunkChannel);
+        MultiNodes.getLog().info("Propagating chunk notification");
         MultiLib.notify(chunkChannel,key.toJson().toString());
     }
 
@@ -20,13 +20,12 @@ public class Propagate {
             //Do something here
             //TODO Logger
             //One of our chunks has updated on a remote server we need to query for that chunk
-            System.out.println("Incoming multilib message");
+            MultiNodes.getLog().info("Receiving chunk notification");
             TileKey key = TileKey.fromJson(data);
             try {
                 //This will load the chunk into cache
                 CacheManager.getInstance().getCache().invalidate(key.getKey());
                 CacheManager.getInstance().getCache().get(key.getKey());
-                System.out.println("Added tile to cache via multlib message");
             } catch (ExecutionException e) {
                 throw new RuntimeException(e);
             }

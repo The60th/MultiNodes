@@ -27,7 +27,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:failureaccess:1.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.errorprone:error_prone_annotations:2.7.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.j2objc:j2objc-annotations:1.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.16-R0.4-deprecated+build.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.33" level="project" />
@@ -64,9 +63,19 @@
     <orderEntry type="library" name="Maven: cloud.commandframework:cloud-core:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: cloud.commandframework:cloud-services:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: cloud.commandframework:cloud-minecraft-extras:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: org.spongepowered:configurate-hocon:4.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.spongepowered:configurate-core:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.spongepowered:configurate-hocon:4.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.spongepowered:configurate-core:4.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.leangen.geantyref:geantyref:1.3.11" level="project" />
+    <orderEntry type="library" name="Maven: com.google.errorprone:error_prone_annotations:2.6.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.typesafe:config:1.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:5.0.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.1.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.17.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.17.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.17.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.17.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.17.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.17.Final" level="project" />
   </component>
 </module>
