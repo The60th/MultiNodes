@@ -38,6 +38,14 @@ public class CmdNodes {
             player.sendMessage("value: " + val.getKey() + "  --  " + val.getOwner());
         });
     }
+
+    @CommandMethod("nodes size")
+    @CommandDescription("View Cache Size")
+    public void size(Player player){
+        player.sendMessage("Cache Size: " + CacheManager.getInstance().getCache().size());
+    }
+
+    /*
     @CommandMethod("nodes load|load2 <key> <value>")
     @CommandDescription("Load the current node you are in")
     public void load(final Player player, final @Argument("key") String key, final @Argument("value") String value ){
@@ -63,7 +71,7 @@ public class CmdNodes {
         //String value = RedisConnection.getInstance().getConnection().get(key);
         //player.sendMessage(Component.text("Key of: " ).append(Component.text(key)).color(NamedTextColor.YELLOW));
         //player.sendMessage(Component.text("Value of: ").append(Component.text(value)).color(NamedTextColor.YELLOW));
-    }
+    }*/
 
     @CommandMethod("nodes owner")
     @CommandDescription("set an owner")
