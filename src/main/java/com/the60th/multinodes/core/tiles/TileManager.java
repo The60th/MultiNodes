@@ -9,7 +9,7 @@ import org.bukkit.Chunk;
 
 public class TileManager {
 
-    public static void claimTile(Chunk chunk, TileKey tileKey, TileValue value){
+    public static void claimTile(TileKey tileKey, TileValue value){
         RedisConnection.getInstance().addTile(tileKey,value);
         CacheManager.getInstance().getCache().put(tileKey.getKey(),value);
         Propagate.notifyChunk(tileKey);

@@ -81,7 +81,7 @@ public class CmdNodes {
         TileValue value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
         value1.setOwner(player.getName());
         printLocalNode(player);
-        TileManager.claimTile(chunk,key1, value1);
+        TileManager.claimTile(key1, value1);
 
     }
     @CommandMethod("nodes info")
