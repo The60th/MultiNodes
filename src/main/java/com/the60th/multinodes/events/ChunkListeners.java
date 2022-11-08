@@ -2,8 +2,7 @@ package com.the60th.multinodes.events;
 
 import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.core.cache.CacheManager;
-import com.the60th.multinodes.core.cache.TileKey;
-import com.the60th.multinodes.core.cache.TileValue;
+import com.the60th.multinodes.land.tile.TileKey;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.world.ChunkLoadEvent;

@@ -1,14 +1,13 @@
 package com.the60th.multinodes.core.database;
 
 import com.the60th.multinodes.MultiNodes;
-import com.the60th.multinodes.core.cache.TileKey;
-import com.the60th.multinodes.core.cache.TileValue;
+import com.the60th.multinodes.land.tile.TileKey;
+import com.the60th.multinodes.land.tile.Tile;
 import com.the60th.multinodes.util.Strings;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.async.RedisAsyncCommands;
-import redis.clients.jedis.Jedis;
 
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -32,7 +31,7 @@ public class RedisConnection {
         return value;
     }*/
 
-    public void addTile(TileKey key, TileValue value){
+    public void addTile(TileKey key, Tile value){
         asyncCommands.set(String.valueOf(key.getKey()),value.toJson().toString());
     }
 
@@ -59,22 +58,21 @@ public class RedisConnection {
     }
     //TODO Need a way to serialize chunkKeys and chunkValues into strings for writing to Redis
 
-    public TileValue getResult(TileKey key) throws ExecutionException, InterruptedException {
+    public Tile getResult(TileKey key) throws ExecutionException, InterruptedException {
         RedisFuture<String> result = asyncCommands.get(String.valueOf(key.getKey()));
-        TileValue tileValue;
+        Tile tile;
         String val = result.get();
         if(val == null){
             //Create new tileValue
             MultiNodes.getLog().info("Creating new node");
-            tileValue = new TileValue(key.getKey());
+            tile = new Tile(key.getKey());
             //Sync back to redis
-            addTile(key,tileValue);
+            addTile(key, tile);
         }else{
-            tileValue = TileValue.fromJson(val);
+            tile = Tile.fromJson(val);
             MultiNodes.getLog().info("Loading node");
         }
-
-        return tileValue;
+        return tile;
     }
 
     public static RedisConnection getInstance() {

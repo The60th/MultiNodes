@@ -1,20 +1,25 @@
-package com.the60th.multinodes.core.cache;
+package com.the60th.multinodes.land.tile;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.the60th.multinodes.land.ownership.Ownership;
 
-public class TileValue {
+public class Tile {
     //TODO values?
     String owner = "empty";
     long key;
 
-    public TileValue(long key){
+    Ownership ownership = new Ownership();
+
+    public Tile(long key){
         this.key = key;
     }
-    public TileValue(long key, String owner){
+    public Tile(long key, String owner){
         this.key = key;
         this.owner = owner;
     }
+
+
 
     public String getOwner(){
         return this.owner;
@@ -32,12 +37,20 @@ public class TileValue {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("key",this.key);
         jsonObject.addProperty("owner",this.owner);
+
+
+        JsonObject ownerShip = ownership.toJson();
+        jsonObject.add("ownership",ownerShip);
+
+
         return jsonObject;
     }
 
-    public static TileValue fromJson(String json){
+    public static Tile fromJson(String json){
         JsonObject obj = new Gson().fromJson(json,JsonObject.class);
-        return new TileValue(Long.parseLong(String.valueOf(obj.get("key")).replaceAll("\"",""))
+        Ownership ownership = Ownership.fromJson(String.valueOf(obj.get("ownership")).replaceAll("\"",""));
+
+        return new Tile(Long.parseLong(String.valueOf(obj.get("key")).replaceAll("\"",""))
                 ,String.valueOf(obj.get("owner")).replaceAll("\"",""));
 
     }

@@ -1,15 +1,14 @@
 package com.the60th.multinodes.command;
 
-import cloud.commandframework.annotations.Argument;
 import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.minecraft.extras.MinecraftHelp;
 import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.core.cache.CacheManager;
-import com.the60th.multinodes.core.cache.TileKey;
-import com.the60th.multinodes.core.cache.TileValue;
+import com.the60th.multinodes.land.tile.TileKey;
+import com.the60th.multinodes.land.tile.Tile;
 import com.the60th.multinodes.command.cloud.NodeCommandManager;
-import com.the60th.multinodes.core.tiles.TileManager;
+import com.the60th.multinodes.core.tiles.ClaimManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -78,10 +77,10 @@ public class CmdNodes {
     public void owner(Player player){
         Chunk chunk = player.getLocation().getChunk();
         TileKey key1 = new TileKey(chunk.getChunkKey());
-        TileValue value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
+        Tile value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
         value1.setOwner(player.getName());
         printLocalNode(player);
-        TileManager.claimTile(key1, value1);
+        ClaimManager.claimTile(key1, value1);
 
     }
     @CommandMethod("nodes info")
@@ -93,7 +92,7 @@ public class CmdNodes {
 
     private void printLocalNode(Player player) {
         TileKey key1 = new TileKey(player.getLocation().getChunk().getChunkKey());
-        TileValue value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
+        Tile value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
         player.sendMessage(Component.text("Current node: \n Key - ")
                 .append(Component.text(value1.getKey()))
                 .append(Component.text("\n Owner: - "))
