@@ -3,7 +3,7 @@ package com.the60th.multinodes;
 import com.the60th.multinodes.command.cloud.NodeCommandManager;
 import com.the60th.multinodes.config.NodesConfig;
 import com.the60th.multinodes.core.crosstalk.Propagate;
-import com.the60th.multinodes.core.player.PlayerMovementCache;
+import com.the60th.multinodes.core.movement.PlayerMovementCache;
 import com.the60th.multinodes.events.ChunkListeners;
 import com.the60th.multinodes.events.RegistrableListener;
 import com.the60th.multinodes.events.movement.JoinListener;

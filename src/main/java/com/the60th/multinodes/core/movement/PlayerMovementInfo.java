@@ -1,6 +1,7 @@
-package com.the60th.multinodes.core.player;
+package com.the60th.multinodes.core.movement;
 
 import com.the60th.multinodes.config.NodesConfig;
+import com.the60th.multinodes.core.map.MapManager;
 import com.the60th.multinodes.util.Palette;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -10,7 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-class PlayerInfo {
+class PlayerMovementInfo {
 
 
 
@@ -23,7 +24,7 @@ class PlayerInfo {
 
     private UUID playerUUID;
 
-    PlayerInfo(UUID uuid){
+    PlayerMovementInfo(UUID uuid){
         this.playerUUID = uuid;
 
         //Update the locations
@@ -93,6 +94,8 @@ class PlayerInfo {
         assert  player != null;
         player.sendMessage(Component.text("Updating your scoreboard task").color(Palette.ASH_GRAY));
 
+        //TODO Not tested
+        MapManager.updateOnMove(player);
     }
 
 

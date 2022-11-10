@@ -1,7 +1,6 @@
 package com.the60th.multinodes.events.movement;
 
 import com.the60th.multinodes.MultiNodes;
-import com.the60th.multinodes.core.player.PlayerMovementCache;
 import com.the60th.multinodes.events.RegistrableListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

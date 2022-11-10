@@ -1,4 +1,4 @@
-package com.the60th.multinodes.core.player;
+package com.the60th.multinodes.core.movement;
 
 import com.the60th.multinodes.MultiNodes;
 import org.bukkit.entity.Player;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class PlayerMovementCache {
 
-    private HashMap<UUID, PlayerInfo> movementCache = new HashMap<UUID, PlayerInfo>();
+    private HashMap<UUID, PlayerMovementInfo> movementCache = new HashMap<UUID, PlayerMovementInfo>();
     private MultiNodes plugin;
 
     public PlayerMovementCache(MultiNodes plugin) {
@@ -22,8 +22,8 @@ public class PlayerMovementCache {
             public void run() {
                 //Loads to cache
                 UUID uuid = player.getUniqueId();
-                PlayerInfo playerInfo = new PlayerInfo(uuid);
-                movementCache.put(uuid, playerInfo);
+                PlayerMovementInfo playerMovementInfo = new PlayerMovementInfo(uuid);
+                movementCache.put(uuid, playerMovementInfo);
             }
         }.runTaskLaterAsynchronously(plugin, 1L);
     }
@@ -46,18 +46,18 @@ public class PlayerMovementCache {
             @Override
             public void run() {
                 UUID uuid = player.getUniqueId();
-                PlayerInfo playerInfo = movementCache.get(uuid);
+                PlayerMovementInfo playerMovementInfo = movementCache.get(uuid);
 
-                if(!playerInfo.updateLocation()) return;
+                if(!playerMovementInfo.updateLocation()) return;
                 //Update the location only every X times
 
-                playerInfo.hasSufficientMovement().thenAccept(val -> {
+                playerMovementInfo.hasSufficientMovement().thenAccept(val -> {
                     if (!val) return;
 
-                    if (!playerInfo.chunkChange()) return;
+                    if (!playerMovementInfo.chunkChange()) return;
                     //Update the player that the chunk has changed.
                     //TODO Player has moved enough, chunk has change perform that task
-                    playerInfo.chunkChangeTask();
+                    playerMovementInfo.chunkChangeTask();
 
                 });
                 //Update movement cache

@@ -55,6 +55,7 @@ public class CmdMap {
         int baseZ = player.getLocation().getChunk().getZ();
 
         Collection<Chunk> chunksAroundPlayer = new HashSet<>();
+
         for(int x : offset) {
             for(int z : offset) {
                 Chunk chunk = world.getChunkAt(baseX + x, baseZ + z);
