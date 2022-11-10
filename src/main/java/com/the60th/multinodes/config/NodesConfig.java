@@ -24,6 +24,14 @@ public class NodesConfig {
         return internalSettings;
     }
 
+    @Comment("Settings for player movement event listeners, tweak for performance enhancements.!")
+    private MovementSettings movementSettings = new MovementSettings();
+
+    public MovementSettings getMovementSettings(){
+        return movementSettings;
+    }
+
+
     public boolean debug() {
         return debug;
     }
