@@ -4,7 +4,7 @@ import com.the60th.multinodes.command.cloud.NodeCommandManager;
 import com.the60th.multinodes.config.NodesConfig;
 import com.the60th.multinodes.core.crosstalk.Propagate;
 import com.the60th.multinodes.core.movement.PlayerMovementCache;
-import com.the60th.multinodes.events.ChunkListeners;
+import com.the60th.multinodes.events.chunks.ChunkListeners;
 import com.the60th.multinodes.events.RegistrableListener;
 import com.the60th.multinodes.events.movement.JoinListener;
 import com.the60th.multinodes.events.movement.LeaveListeners;

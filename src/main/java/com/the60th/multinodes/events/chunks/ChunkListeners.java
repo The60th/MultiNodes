@@ -1,7 +1,8 @@
-package com.the60th.multinodes.events;
+package com.the60th.multinodes.events.chunks;
 
 import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.core.cache.CacheManager;
+import com.the60th.multinodes.events.RegistrableListener;
 import com.the60th.multinodes.land.tile.TileKey;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
