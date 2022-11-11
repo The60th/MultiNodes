@@ -25,7 +25,7 @@ public class Ownership {
     }
 
     public static Ownership fromJson(String json){
-        JsonObject obj = new Gson().fromJson(json,JsonObject.class);
+        //JsonObject obj = new Gson().fromJson(json,JsonObject.class);
         return new Ownership();
     }
 }

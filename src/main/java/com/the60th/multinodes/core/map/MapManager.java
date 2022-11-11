@@ -27,4 +27,15 @@ public class MapManager {
     public static void updateOnMove(Player player){
         maps.get(player.getUniqueId()).updateData();
     }
+
+
+    public static void create(Player player){
+        if (maps.containsKey(player.getUniqueId())) return;
+        maps.put(player.getUniqueId(),new PlayerMap(player));
+        maps.get(player.getUniqueId()).mapOn();
+    }
+
+    public static void remove(Player player){
+        maps.remove(player.getUniqueId());
+    }
 }

@@ -20,15 +20,13 @@ public class ChunkListeners extends RegistrableListener {
 
     @EventHandler
     public void onChunkLoad(ChunkLoadEvent event) throws ExecutionException {
-        //Create this from a chunk
-        Chunk chunk = event.getChunk();
-        TileKey key = new TileKey(chunk.getChunkKey());
         //This will load it by default and provide the tile value if needed
-        //TODO Async this
         new BukkitRunnable(){
             @Override
             public void run() {
                 //Loads to cache
+                Chunk chunk = event.getChunk();
+                TileKey key = new TileKey(chunk.getChunkKey());
                 CacheManager.getInstance().getCache().getUnchecked(key.getKey());
             }
         }.runTaskLaterAsynchronously(plugin,1L);
@@ -37,13 +35,11 @@ public class ChunkListeners extends RegistrableListener {
 
     @EventHandler
     public void onChunkUnload(ChunkUnloadEvent event){
-        Chunk chunk = event.getChunk();
-        TileKey key = new TileKey(chunk.getChunkKey()); // Create a tile key here from the chunk
-        //TODO Async this
         new BukkitRunnable(){
-
             @Override
             public void run() {
+                Chunk chunk = event.getChunk();
+                TileKey key = new TileKey(chunk.getChunkKey()); // Create a tile key here from the chunk
                 CacheManager.getInstance().getCache().invalidate(key.getKey());
             }
         }.runTaskLaterAsynchronously(plugin,1L);

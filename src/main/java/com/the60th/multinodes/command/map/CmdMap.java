@@ -6,8 +6,11 @@ import cloud.commandframework.minecraft.extras.MinecraftHelp;
 import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.command.cloud.NodeCommandManager;
 import com.the60th.multinodes.core.cache.CacheManager;
+import com.the60th.multinodes.core.map.MapManager;
 import com.the60th.multinodes.land.tile.Tile;
+import com.the60th.multinodes.util.Palette;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -33,12 +36,8 @@ public class CmdMap {
     @CommandMethod("nodes map")
     @CommandDescription("View a map of nearby nodes")
     public void map(Player player){
-        CacheManager.getInstance().getCache().asMap().forEach((key, val) ->{
-            player.sendMessage("Key: " + key);
-            player.sendMessage("value: " + val.getKey() + "  --  " + val.getOwner());
-        });
-
-
+        player.sendMessage(Component.text("Starting mapper").color(Palette.YELLOW_GREEN_CRAYOLA));
+        MapManager.create(player);
 
     }
 

@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 class PlayerMovementInfo {
 
 
-
     private Location lastLocation;
 
     private long lastChunkKey;
@@ -24,26 +23,28 @@ class PlayerMovementInfo {
 
     private UUID playerUUID;
 
-    PlayerMovementInfo(UUID uuid){
+    PlayerMovementInfo(UUID uuid) {
         this.playerUUID = uuid;
 
         //Update the locations
         Player player = Bukkit.getPlayer(this.playerUUID);
-        if(player == null) return;
+        if (player == null) return;
         this.lastLocation = player.getLocation();
     }
 
-     boolean updateLocation(){
-        //Check delta
-        Player player  = Bukkit.getPlayer(this.playerUUID);
+    boolean updateLocation() {
+        Player player = Bukkit.getPlayer(this.playerUUID);
         assert player != null;
         callsSinceLastUpdate++;
-        if(callsSinceLastUpdate < NodesConfig.get().getMovementSettings().getUpdateThreshold()) return false;
+        if (callsSinceLastUpdate < NodesConfig.get().getMovementSettings().getUpdateThreshold()) return false;
         callsSinceLastUpdate = 0;
-
         Location currentLoc = player.getLocation();
+        double delta = lastLocation.distanceSquared(currentLoc);
+        if (delta < NodesConfig.get().getMovementSettings().getDeltaThreshold()) {
+            return false;
+        }
 
-        if(lastChunkKey != currentLoc.getChunk().getChunkKey()){
+        if (lastChunkKey != currentLoc.getChunk().getChunkKey()) {
             chunkChange = true;
             lastChunkKey = currentLoc.getChunk().getChunkKey();
         }
@@ -52,52 +53,47 @@ class PlayerMovementInfo {
     }
 
     //Once true chunk change should stay true until we access the value
-    boolean chunkChange(){
-        if(this.chunkChange){
+    boolean chunkChange() {
+        if (this.chunkChange) {
             this.chunkChange = false;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     //TODO Not quite sure if this is done properly tbh
-    CompletableFuture<Boolean> hasSufficientMovement(){
+    CompletableFuture<Boolean> hasSufficientMovement() {
         CompletableFuture<Boolean> completableFuture = new CompletableFuture<>();
-        Player player  = Bukkit.getPlayer(this.playerUUID);
+        Player player = Bukkit.getPlayer(this.playerUUID);
         assert player != null;
-        Location currentLoc = player.getLocation();
-        double delta = lastLocation.distanceSquared(currentLoc);
-        if(delta < NodesConfig.get().getMovementSettings().getDeltaThreshold()){
-            completableFuture.complete(false);
-        }else{
-            completableFuture.complete(true);
-        }
+        completableFuture.complete(true);
         return completableFuture;
     }
 
     //This method is always called ASYNC
-    void chunkChangeTask(){
+    void chunkChangeTask() {
         actionBarTextTask();
         scoreBoardMapTask();
     }
 
-    private void actionBarTextTask(){
+    private void actionBarTextTask() {
         Player player = Bukkit.getPlayer(this.playerUUID);
-        assert  player != null;
+        assert player != null;
         player.sendMessage(Component.text("Updating your actionbar task").color(Palette.ASH_GRAY));
-
+        player.sendActionBar(Component.text("Chunk Key: ")
+                .append(Component.text(player.getLocation().getChunk().getChunkKey()))
+                .color(Palette.YELLOW_GREEN_CRAYOLA));
     }
 
-    private void scoreBoardMapTask(){
+    private void scoreBoardMapTask() {
         Player player = Bukkit.getPlayer(this.playerUUID);
-        assert  player != null;
+        assert player != null;
         player.sendMessage(Component.text("Updating your scoreboard task").color(Palette.ASH_GRAY));
 
         //TODO Not tested
         MapManager.updateOnMove(player);
     }
-
 
 
 }

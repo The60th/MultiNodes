@@ -64,13 +64,13 @@ public class RedisConnection {
         String val = result.get();
         if(val == null){
             //Create new tileValue
-            MultiNodes.getLog().info("Creating new node");
+            //MultiNodes.getLog().info("Creating new node");
             tile = new Tile(key.getKey());
             //Sync back to redis
             addTile(key, tile);
         }else{
             tile = Tile.fromJson(val);
-            MultiNodes.getLog().info("Loading node");
+            //MultiNodes.getLog().info("Loading node");
         }
         return tile;
     }

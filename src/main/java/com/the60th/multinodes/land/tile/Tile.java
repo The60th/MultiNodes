@@ -9,7 +9,7 @@ public class Tile {
     String owner = "empty";
     long key;
 
-    Ownership ownership = new Ownership();
+    //Ownership ownership = new Ownership();
 
     public Tile(long key){
         this.key = key;
@@ -39,8 +39,8 @@ public class Tile {
         jsonObject.addProperty("owner",this.owner);
 
 
-        JsonObject ownerShip = ownership.toJson();
-        jsonObject.add("ownership",ownerShip);
+        //JsonObject ownerShip = ownership.toJson();
+        //jsonObject.add("ownership",ownerShip);
 
 
         return jsonObject;

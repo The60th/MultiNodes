@@ -47,20 +47,23 @@ public class PlayerMovementCache {
             public void run() {
                 UUID uuid = player.getUniqueId();
                 PlayerMovementInfo playerMovementInfo = movementCache.get(uuid);
+                if (playerMovementInfo == null) {
+                    uuid = player.getUniqueId();
+                    playerMovementInfo = new PlayerMovementInfo(uuid);
+                    movementCache.put(uuid, playerMovementInfo);
+                    playerMovementInfo = movementCache.get(uuid);
+                }
 
-                if(!playerMovementInfo.updateLocation()) return;
-                //Update the location only every X times
+                if (!playerMovementInfo.updateLocation()) return;
 
+                PlayerMovementInfo finalPlayerMovementInfo = playerMovementInfo;
                 playerMovementInfo.hasSufficientMovement().thenAccept(val -> {
                     if (!val) return;
-
-                    if (!playerMovementInfo.chunkChange()) return;
-                    //Update the player that the chunk has changed.
+                    if (!finalPlayerMovementInfo.chunkChange()) return;
                     //TODO Player has moved enough, chunk has change perform that task
-                    playerMovementInfo.chunkChangeTask();
+                    finalPlayerMovementInfo.chunkChangeTask();
 
                 });
-                //Update movement cache
             }
         }.runTaskLaterAsynchronously(plugin, 1L);
     }

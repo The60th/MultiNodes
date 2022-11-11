@@ -10,6 +10,7 @@ import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.command.CmdNodes;
+import com.the60th.multinodes.command.map.CmdMap;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -20,6 +21,7 @@ public class NodeCommandManager {
     private final PaperCommandManager<CommandSender> manager;
     private final CmdNodes cmdNodes;
 
+    private final CmdMap cmdMap;
     public NodeCommandManager(MultiNodes plugin){
         this.plugin = plugin;
         try {
@@ -36,8 +38,9 @@ public class NodeCommandManager {
 
 
         cmdNodes = new CmdNodes(plugin,this);
+        cmdMap = new CmdMap(plugin,this);
 
-        AnnotationParser<CommandSender> parser = new AnnotationParser<>(
+        AnnotationParser<CommandSender> nodeParser = new AnnotationParser<>(
                 manager,
                 CommandSender.class,
                 params -> CommandMeta.simple()
@@ -45,6 +48,13 @@ public class NodeCommandManager {
                         .build()
         );
 
+        AnnotationParser<CommandSender> mapParser = new AnnotationParser<>(
+                manager,
+                CommandSender.class,
+                params -> CommandMeta.simple()
+                        .with(CommandMeta.DESCRIPTION, params.get(StandardParameters.DESCRIPTION, "Default description for map command"))
+                        .build()
+        );
         //TODO Use this later?
         /*manager.parameterInjectorRegistry().registerInjector(
                 Persona.class,
@@ -59,7 +69,8 @@ public class NodeCommandManager {
         // captions (basically custom, error messages)
         //captionFactory.registerMessageFactory();
         // register commands
-        parser.parse(cmdNodes);
+        nodeParser.parse(cmdNodes);
+        mapParser.parse(cmdMap);
 
     }
 

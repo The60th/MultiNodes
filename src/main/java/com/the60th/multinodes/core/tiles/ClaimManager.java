@@ -33,7 +33,7 @@ public class ClaimManager {
      * Etc
      * */
     public static void claimActions(TileKey tileKey){
-        
+
         MapManager.updateSingleTile(tileKey.getKey());
     }
 
