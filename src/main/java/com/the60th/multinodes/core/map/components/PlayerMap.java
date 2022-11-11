@@ -25,7 +25,7 @@ public class PlayerMap {
     private final String TEAM_NAME = "teamM";
     private final int MAP_SIZE = 7;
     //7 works!
-    //11 we need to reposition the center 
+    //11 we need to reposition the center
     Player player;
     long[][] mapKeys = new long[MAP_SIZE][MAP_SIZE];
     MapTile[][] mapTiles = new MapTile[MAP_SIZE][MAP_SIZE];
@@ -163,6 +163,7 @@ public class PlayerMap {
         int baseX = player.getLocation().getChunk().getX();
         int baseZ = player.getLocation().getChunk().getZ();
 
+        //TODO This minus 3 should be half of MAP_SIZE rounded down
         int shiftedBaseX = baseX - 3;
         int shiftedBaseZ = baseZ - 3;
 
