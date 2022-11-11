@@ -25,6 +25,8 @@ public class MapTile {
 
         if(tile.getOwner().equalsIgnoreCase("the60th")){
             return Component.text(symbol).color(Palette.TANGERINE);
+        }else if(tile.getOwner().equalsIgnoreCase("Wukio13IsMyQueen")){
+            return Component.text(symbol).color(Palette.ASH_GRAY);
         }
         return Component.text(symbol).color(Palette.DEEP_SPACE);
     }

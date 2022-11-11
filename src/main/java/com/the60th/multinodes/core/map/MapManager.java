@@ -16,7 +16,7 @@ public class MapManager {
      * */
     public static void updateSingleTile(long key){
         for (PlayerMap map : maps.values()) {
-            map.updateTile(key);
+            map.updateData();
         }
     }
 

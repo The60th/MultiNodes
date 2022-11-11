@@ -90,7 +90,7 @@ public class PlayerMap {
     //Update the map for a player
     //Called when during a moveEvent
     //Or by the MapManager to propagate a change to all tiles
-    public void updateDisplay(){
+    private void updateDisplay(){
         sendScoreBoard();
     }
 
@@ -103,20 +103,6 @@ public class PlayerMap {
             //Error?
             toggleScoreBoardOn();
             return;
-        }
-
-        //TODO build the map here.
-        TextColor color;
-        if(tracker == 0) {
-            color = Palette.TANGERINE;
-            tracker++;
-        }else{
-            color = Palette.DEEP_SPACE;
-            tracker = 0;
-        }
-
-        for (int i = 0; i < MAP_SIZE; i++){
-            //Objects.requireNonNull(scoreboard.getTeam(TEAM_NAME + i)).suffix(Component.text("123123").color(color));
         }
 
         Component[] lines = new Component[MAP_SIZE];
@@ -136,12 +122,10 @@ public class PlayerMap {
         }
 
     }
-    private int tracker = 0;
     /**
      * Update the internal values for the map
      *
      * */
-    //Call this in move events and when a tile changes.
     public void updateData(){ //TODO Async
         if(!mapOn) return;
         //Take the current map keys, find the new map keys, compare the diff
@@ -177,7 +161,6 @@ public class PlayerMap {
         return keys;
     }
 
-    //TODO I need to understand completable futures better
     private CompletableFuture<MapTile[][]> getTileKeys(){
         CompletableFuture<MapTile[][]> future = new CompletableFuture<>();
         MapTile[][] array = new MapTile[MAP_SIZE][MAP_SIZE];
@@ -194,17 +177,4 @@ public class PlayerMap {
         return future;
     }
 
-    public void updateTile(long key){
-        if(!mapOn) return;
-        for(int i = 0; i < MAP_SIZE; i++){
-            for(int j = 0; j < MAP_SIZE; j++){
-                if(mapKeys[i][j] == key) {
-                    //TODO
-                    //Update this specific tile.
-
-                    long key1 = key;
-                }
-            }
-        }
-    }
 }
