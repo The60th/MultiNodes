@@ -1,0 +1,28 @@
+{
+  "town": {
+    "name": "Stockholm",
+    "id": "123x-123x-123x",
+    "members": [
+      {
+        "name": "the60th",
+        "id": "123x-123x-123x",
+        "rank": "assistant"
+      },
+      {
+        "name": "twi",
+        "id": "123x=123x=123x",
+        "rank": "member"
+      }
+    ],
+    "nodes": [
+      {
+        "name": "Node_Name",
+        "id": "Node_id"
+      }
+    ],
+    "nation": {
+      "name": "Sweden",
+      "id": "123x-123x-123x"
+    }
+  }
+}

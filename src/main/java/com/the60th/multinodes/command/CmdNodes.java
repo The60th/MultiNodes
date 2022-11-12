@@ -78,11 +78,22 @@ public class CmdNodes {
         Chunk chunk = player.getLocation().getChunk();
         TileKey key1 = new TileKey(chunk.getChunkKey());
         Tile value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
-        value1.setOwner(player.getName());
+        value1.setOwner(player);
         printLocalNode(player);
         ClaimManager.claimTile(key1, value1);
 
     }
+
+    @CommandMethod("nodes ownership")
+    @CommandDescription("View detailed ownership information")
+    public void ownershipInfo(Player player){
+        Chunk chunk = player.getLocation().getChunk();
+        TileKey key1 = new TileKey(chunk.getChunkKey());
+        Tile value1 = CacheManager.getInstance().getCache().getUnchecked(key1.getKey());
+        printLocalNode(player);
+        player.sendMessage(value1.getOwnership().toJson().toString());
+    }
+
     @CommandMethod("nodes info")
     @CommandDescription("Node info")
     public void info(final Player player){

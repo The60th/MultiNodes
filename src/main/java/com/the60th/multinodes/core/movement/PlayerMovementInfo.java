@@ -80,7 +80,7 @@ class PlayerMovementInfo {
     private void actionBarTextTask() {
         Player player = Bukkit.getPlayer(this.playerUUID);
         assert player != null;
-        player.sendMessage(Component.text("Updating your actionbar task").color(Palette.ASH_GRAY));
+        //player.sendMessage(Component.text("Updating your actionbar task").color(Palette.ASH_GRAY));
         player.sendActionBar(Component.text("Chunk Key: ")
                 .append(Component.text(player.getLocation().getChunk().getChunkKey()))
                 .color(Palette.YELLOW_GREEN_CRAYOLA));
@@ -89,9 +89,7 @@ class PlayerMovementInfo {
     private void scoreBoardMapTask() {
         Player player = Bukkit.getPlayer(this.playerUUID);
         assert player != null;
-        player.sendMessage(Component.text("Updating your scoreboard task").color(Palette.ASH_GRAY));
-
-        //TODO Not tested
+        //player.sendMessage(Component.text("Updating your scoreboard task").color(Palette.ASH_GRAY));
         MapManager.updateOnMove(player);
     }
 

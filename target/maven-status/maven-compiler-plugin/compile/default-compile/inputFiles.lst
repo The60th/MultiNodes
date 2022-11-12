@@ -1,9 +1,10 @@
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\movement\PlayerMovementInfo.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\tile\TileKey.java
+C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\ownership\owner\EmptyOwner.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\events\movement\LeaveListeners.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\nation\Nation.java
+C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\events\prevention\PreventionListeners.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\map\components\PlayerMap.java
-C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\events\ChunkListeners.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\events\movement\JoinListener.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\crosstalk\Propagate.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\map\MapManager.java
@@ -18,6 +19,7 @@ C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\MultiNodes.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\config\NodesConfig.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\ownership\owner\Owner.java
+C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\events\chunks\ChunkListeners.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\config\MovementSettings.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\tiles\ClaimManager.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\map\components\MapTile.java
@@ -30,5 +32,6 @@ C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\ownership\Ownership.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\core\map\components\MapTileType.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\command\CmdNodes.java
+C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\ownership\Priority.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\land\tile\Tile.java
 C:\Users\Justi\Documents\GitHub\MultiNodes\src\main\java\com\the60th\multinodes\util\Palette.java
