@@ -26,7 +26,14 @@ public class Node {
     UUID id;
 
     public Node(){
+        
+    }
 
+    //Called when we create a new node
+    public Node(String displayName, long homeChunk){
+        this.displayName = displayName;
+        this.homeChunk = homeChunk;
+        this.id = UUID.randomUUID();
     }
 
     public Node(String displayName, UUID id, long homeChunk,ArrayList<Long> chunks){
@@ -38,9 +45,11 @@ public class Node {
         chunks.forEach(chunk ->{
             tiles.put(chunk, CacheManager.getInstance().getCache().getUnchecked(chunk));
         });
-
         //Async
+    }
 
+    public UUID getId() {
+        return id;
     }
 
     public JsonObject toJson(){

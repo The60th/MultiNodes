@@ -1,4 +1,4 @@
-package com.the60th.multinodes.core.database;
+package com.the60th.multinodes.core.redis;
 
 import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.land.tile.TileKey;

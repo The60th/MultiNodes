@@ -3,7 +3,7 @@ package com.the60th.multinodes.core.cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.the60th.multinodes.core.database.RedisConnection;
+import com.the60th.multinodes.core.redis.RedisConnection;
 import com.the60th.multinodes.land.tile.TileKey;
 import com.the60th.multinodes.land.tile.Tile;
 import org.jetbrains.annotations.NotNull;

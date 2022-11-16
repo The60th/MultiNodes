@@ -2,13 +2,17 @@ package com.the60th.multinodes.core.tiles;
 
 import com.the60th.multinodes.core.cache.CacheManager;
 import com.the60th.multinodes.core.map.MapManager;
+import com.the60th.multinodes.land.node.Node;
 import com.the60th.multinodes.land.tile.TileKey;
 import com.the60th.multinodes.land.tile.Tile;
 import com.the60th.multinodes.core.crosstalk.Propagate;
-import com.the60th.multinodes.core.database.RedisConnection;
+import com.the60th.multinodes.core.redis.RedisConnection;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class ClaimManager {
-
+    public static ArrayList<Node> activeNodes = new ArrayList<>();
     /**
      * Call this method when ever a tile changes on the local server.
      *
@@ -33,8 +37,17 @@ public class ClaimManager {
      * Etc
      * */
     public static void claimActions(TileKey tileKey){
-
         MapManager.updateSingleTile(tileKey.getKey());
     }
 
+    //TODO Tester method for node interactions
+    public static void createNode(String displayName, long homeChunk){
+        Node node = new Node(displayName, homeChunk);
+        activeNodes.add(node);
+
+    }
+
+    public static Node getMagicNode(UUID uuid){
+        return new Node();
+    }
 }
