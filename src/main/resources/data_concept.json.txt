@@ -1,0 +1,27 @@
+
+  Town {
+  object_id,
+  // for mongo indexing
+  uuid,
+  name,
+  date_created
+  // more meta data here
+  // note no "game data" is stored here
+}
+
+TownClaims {
+  town_uuid,
+  set_of_node_claims
+  // etc
+}
+
+TownPerms {
+  town_uuid,
+  permission_map
+}
+
+TownPopulation {
+  town_uuid,
+  owner_player,
+  member_set
+}
