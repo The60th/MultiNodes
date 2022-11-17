@@ -54,7 +54,7 @@ public class RedisConnection {
         asyncCommands = connection.async();
 
 
-        MultiNodes.getInstance().getLogger().log(Level.ALL, Strings.REDIS_CONNECTION);
+        MultiNodes.getINSTANCE().getLogger().log(Level.ALL, Strings.REDIS_CONNECTION);
     }
     //TODO Need a way to serialize chunkKeys and chunkValues into strings for writing to Redis
 

@@ -19,9 +19,13 @@ public class NodesConfig {
     private boolean debug = true;
     @Comment("Internal settings for managing plugin internals. Don't touch unless you are a tech fleeper!")
     private InternalSettings internalSettings = new InternalSettings();
-
+    @Comment("Settings for mongo DB")
+    private MongoSettings mongoSettings = new MongoSettings();
     public InternalSettings getInternalSettings(){
         return internalSettings;
+    }
+    public MongoSettings getMongoSettings(){
+        return mongoSettings;
     }
 
     @Comment("Settings for player movement event listeners, tweak for performance enhancements.!")

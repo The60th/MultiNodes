@@ -4,7 +4,6 @@ import com.the60th.multinodes.MultiNodes;
 import com.the60th.multinodes.core.cache.CacheManager;
 import com.the60th.multinodes.util.Palette;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -59,7 +58,7 @@ public class PlayerMap {
                 player.setScoreboard(board);
                 updateDisplay();
             }
-        }.runTaskLater(MultiNodes.getInstance(),1L);
+        }.runTaskLater(MultiNodes.getINSTANCE(),1L);
 
 
     }

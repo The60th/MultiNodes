@@ -17,7 +17,7 @@ public class Propagate {
     }
 
     public static void listen() {
-        MultiLib.onString(MultiNodes.getInstance(), chunkChannel, data -> {
+        MultiLib.onString(MultiNodes.getINSTANCE(), chunkChannel, data -> {
             //Do something here
             //TODO Logger
             //One of our chunks has updated on a remote server we need to query for that chunk
